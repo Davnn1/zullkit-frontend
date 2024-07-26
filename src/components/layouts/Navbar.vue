@@ -12,9 +12,9 @@ import UserInfo from "./UserInfo.vue";
 			class="container flex flex-wrap items-center justify-between mx-auto my-2"
 		>
 			<Logo/>
+			<NavigationLinks/>
 			<div class="md:order-2">
 				<UserInfo/>
-				<NavigationLinks/>
 			</div>
 		</div>
 	</nav>
