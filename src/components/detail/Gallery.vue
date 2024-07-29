@@ -29,7 +29,7 @@ const galleries = ref([
       <template v-for="gallery in galleries" :key="gallery.id">
         <div @click="defaultImage = gallery.image" class="overflow-hidden cursor-pointer rounded-2xl"
              :class="{ 'ring-2 ring-indigo-500' : defaultImage === gallery.image}">
-          <img :src="'src/assets/img/'+gallery.image" class="w-full" alt="">
+          <img :src="'/src/assets/img/'+gallery.image" class="w-full" alt="">
         </div>
       </template>
     </div>
