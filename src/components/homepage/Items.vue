@@ -7,19 +7,19 @@ const items = ref([
 		id: 1,
 		title: "Mobile UI Kit",
 		subTitle: "Mobile UI Kit",
-		image: "src/assets/img/items-1.jpg",
+		image: "items-1.jpg",
 	},
 	{
 		id: 2,
 		title: "Online Doctor Consultation",
 		subTitle: "Website UI Kit",
-		image: "src/assets/img/items-2.jpg",
+		image: "items-2.jpg",
 	},
 	{
 		id: 3,
 		title: "Banking Crypto",
 		subTitle: "Mobile UI Kit",
-		image: "src/assets/img/items-3.jpg",
+		image: "items-3.jpg",
 	},
 ]);
 </script>

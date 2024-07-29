@@ -15,7 +15,7 @@ defineProps({
 					<img
 						alt="Placeholder"
 						class="block w-full h-auto"
-						:src="image"
+						:src="'/src/assets/img/'+image"
 					/>
 				</div>
 			</RouterLink>
