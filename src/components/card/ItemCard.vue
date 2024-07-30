@@ -2,10 +2,10 @@
 import {RouterLink} from "vue-router";
 
 defineProps({
-    id: Number,
-	title: String,
-	image: String,
-	subTitle: String
+  id: Number,
+	name: String,
+	thumbnails: String,
+  subtitle: String
 });
 </script>
 
@@ -17,7 +17,7 @@ defineProps({
 					<img
 						alt="Placeholder"
 						class="block w-full h-auto"
-						:src="'/src/assets/img/'+image"
+						:src="thumbnails"
 					/>
 				</div>
 			</RouterLink>
@@ -26,12 +26,12 @@ defineProps({
 				class="px-4 mb-4 leading-tight"
 			>
 				<h1 class="text-lg">
-					<a class="font-semibold text-black no-underline hover:underline" href="#">
-						{{ title }}
-					</a>
+					<RouterLink class="font-semibold text-black no-underline hover:underline" :to="'/product/'+id">
+						{{ name }}
+					</RouterLink>
 				</h1>
 				<span class="block text-sm font-light text-gray-500 no-underline">
-                {{ subTitle }}
+                {{ subtitle }}
               </span>
 			</header>
 		</div>
