@@ -13,7 +13,7 @@ const user = computed(() => userStore.getUser);
 
 async function getProductData() {
     try {
-        const response = await axios.get("http://127.0.0.1:8000/api/products?id=" + $route.params.id);
+        const response = await axios.get("https://zullkit-backend-87125781cc8c.herokuapp.com/api/products?id=" + $route.params.id);
         product.value = response.data.data;
     } catch (error) {
         console.error("Error fetching categories:", error);

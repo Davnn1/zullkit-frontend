@@ -14,7 +14,7 @@ export const useUserStore = defineStore( {
 		actions: {
 			async fetchUser() {
 				try {
-					const { data } = await axios.get( 'http://127.0.0.1:8000/api/user', {
+					const { data } = await axios.get( 'https://zullkit-backend-87125781cc8c.herokuapp.com/api/user', {
 						headers: {
 							Authorization: localStorage.getItem( 'token_type' ) + ' ' + localStorage.getItem( 'access_token' )
 						}

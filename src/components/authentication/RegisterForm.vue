@@ -1,7 +1,8 @@
 <script setup>
 import { ref } from "vue";
-import { RouterLink } from "vue-router";
+import {RouterLink, useRouter} from "vue-router";
 import axios from "axios";
+import {useUserStore} from "@/stores/user.js";
 
 const form = ref({
 	name: "",
@@ -10,11 +11,17 @@ const form = ref({
     title:"Designer"
 });
 
+const userStore = useUserStore()
+
+const $router = useRouter();
+
 async function register() {
     try {
-        const response = await axios.post("http://127.0.0.1:8000/api/register", form.value);
-        localStorage.setItem("token", response.data.data.access_token);
+        const response = await axios.post("https://zullkit-backend-87125781cc8c.herokuapp.com/api/register", form.value);
+        localStorage.setItem("access_token", response.data.data.access_token);
         localStorage.setItem("token_type", response.data.data.token_type);
+        await userStore.fetchUser();
+        await $router.push("/");
     } catch (error) {
         console.error("Error fetching categories:", error);
     }

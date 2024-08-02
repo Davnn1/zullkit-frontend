@@ -10,7 +10,7 @@ const categoryName = ref("");
 
 async function getItemsData() {
   try {
-    const response = await axios.get('http://127.0.0.1:8000/api/categories?id=' + $route.params.id +'&show_product=1');
+    const response = await axios.get('https://zullkit-backend-87125781cc8c.herokuapp.com/api/categories?id=' + $route.params.id +'&show_product=1');
     categoryName.value = response.data.data.name
     items.value = response.data.data.products;
   } catch (error) {

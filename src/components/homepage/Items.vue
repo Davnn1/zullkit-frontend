@@ -7,7 +7,7 @@ const items = ref([]);
 
 async function getItemsData() {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/products");
+    const response = await axios.get("https://zullkit-backend-87125781cc8c.herokuapp.com/api/products");
     items.value = response.data.data.data;
   } catch (error) {
     console.error("Error fetching categories:", error);

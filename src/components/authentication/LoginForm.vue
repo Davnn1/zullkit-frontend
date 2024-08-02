@@ -15,7 +15,7 @@ const $router = useRouter();
 
 async function login() {
     try {
-        const response = await axios.post("http://127.0.0.1:8000/api/login", form.value);
+        const response = await axios.post("https://zullkit-backend-87125781cc8c.herokuapp.com/api/login", form.value);
         localStorage.setItem("access_token", response.data.data.access_token);
         localStorage.setItem("token_type", response.data.data.token_type);
         await userStore.fetchUser();

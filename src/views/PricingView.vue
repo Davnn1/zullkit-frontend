@@ -7,7 +7,7 @@ const $router = useRouter();
 
 async function checkout(price) {
     try {
-        const response = await axios.post("http://127.0.0.1:8000/api/checkout", {
+        const response = await axios.post("https://zullkit-backend-87125781cc8c.herokuapp.com/api/checkout", {
             payment_total: price,
             payment_status: "PENDING"
         }, {
