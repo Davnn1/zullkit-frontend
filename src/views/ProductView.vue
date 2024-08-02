@@ -51,7 +51,7 @@ onMounted(() => {
                 <aside class="w-full px-4 sm:w-1/3 md:w-1/3">
                     <div class="sticky top-0 w-full pt-4 md:mt-24 ">
                         <div class="p-6 border rounded-2xl">
-                            <div class="mb-4" v-if="product.is_figma === 1">
+                            <div class="mb-4" v-if="product.is_figma === true">
                                 <div class="flex mb-2">
                                     <div>
                                         <img src="@/assets/img/icon-figma.png" alt="" class="w-16"/>
@@ -62,7 +62,7 @@ onMounted(() => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-4" v-if="product.is_sketch ===1">
+                            <div class="mb-4" v-if="product.is_sketch === true">
                                 <div class="flex mb-2">
                                     <div>
                                         <img src="@/assets/img/icon-sketch.png" alt="" class="w-16"/>
