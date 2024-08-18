@@ -23,9 +23,9 @@ onMounted(() => {
             class="container flex flex-wrap items-center justify-between mx-auto my-2"
         >
             <Logo />
+            <NavigationLinks />
             <UserInfo v-if="isLoggedIn" :user="user.data" />
             <AuthButton v-else/>
-            <NavigationLinks />
         </div>
     </nav>
 </template>

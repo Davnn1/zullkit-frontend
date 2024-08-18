@@ -1,58 +1,77 @@
 <script setup>
-    const props = defineProps({
-        user: Object
-    })
+import {Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue'
+import axios from "axios";
+import {useUserStore} from "@/stores/user.js";
+import {useRouter} from "vue-router";
+
+const props = defineProps({
+    user: Object
+})
+
+const userStore = useUserStore()
+
+const $router = useRouter();
+
+async function logout() {
+    try {
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("token_type");
+        await userStore.fetchUser();
+        await $router.push("/");
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+    }
+}
+
 </script>
 
 <template>
     <div class="flex items-center md:order-2">
-        <div class="mr-2 text-sm font-regular">Halo, {{ user.name }}</div>
-        <button
-            type="button"
-            class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-            id="user-menu-button"
-            aria-expanded="false"
-            data-dropdown-toggle="dropdown"
-        >
-            <span class="sr-only">Open user menu</span>
-            <img
-                class="w-8 h-8 rounded-full"
-                :src="user.profile_photo_url"
-                alt="user photo"
-            />
-        </button>
-
-        <div
-            class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-            id="dropdown"
-        >
-            <div class="px-4 py-3">
-                <span class="block text-sm text-gray-900 dark:text-white">{{ user.name }}</span>
-                <span
-                    class="block text-sm text-gray-500 truncate font-regular dark:text-gray-400"
-                >{{ user.email }}</span>
+        <Menu as="div" class="relative inline-block text-left">
+            <div class="flex items-center"> <!-- Ubah dari "contents" menjadi "flex items-center" -->
+                <a class="mr-2 text-sm font-regular">Halo, {{ user.name }}</a>
+                <MenuButton
+                    class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                    id="user-menu-button"
+                    aria-expanded="false">
+                    <span class="sr-only">Open user menu</span>
+                    <img
+                        class="w-8 h-8 rounded-full"
+                        :src="user.profile_photo_url"
+                        alt="user photo"
+                    />
+                </MenuButton>
             </div>
-            <ul class="py-1" aria-labelledby="dropdown">
-                <li>
-                    <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >Subscriptions</a>
-                </li>
-                <li>
-                    <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >Settings</a>
-                </li>
-                <li>
-                    <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    >Sign out</a>
-                </li>
-            </ul>
-        </div>
+            <transition enter-active-class="transition ease-out duration-100"
+                        enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+                        leave-active-class="transition ease-in duration-75"
+                        leave-from-class="transform opacity-100 scale-100"
+                        leave-to-class="transform opacity-0 scale-95">
+                <MenuItems
+                    class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div class="px-4 py-3">
+                        <span class="block text-sm text-gray-900 dark:text-white">{{ user.name }}</span>
+                        <span
+                            class="block text-sm text-gray-500 truncate font-regular dark:text-gray-400"
+                        >{{ user.email }}</span>
+                    </div>
+                    <div class="py-1">
+                        <MenuItem v-slot="{ active }">
+                            <a href="#"
+                               :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Subscriptions</a>
+                        </MenuItem>
+                        <MenuItem v-slot="{ active }">
+                            <a href="#"
+                               :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Setting</a>
+                        </MenuItem>
+                        <MenuItem v-slot="{ active }">
+                            <a @click="logout"
+                               :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Log out</a>
+                        </MenuItem>
+                    </div>
+                </MenuItems>
+            </transition>
+        </Menu>
         <button
             data-collapse-toggle="mobile-menu-2"
             type="button"
@@ -69,7 +88,7 @@
             >
                 <path
                     fill-rule="evenodd"
-                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
                     clip-rule="evenodd"
                 />
             </svg>
